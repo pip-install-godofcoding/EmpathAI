@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Consultant — Empathetic Chat</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <div id="app" class="layout">
+    <aside class="sidebar">
+      <div class="brand">AI Consultant</div>
+      <div class="userBox">
+        <div id="userInfo">Not signed in</div>
+        <button id="showLogin">Sign In</button>
+      </div>
+      <nav class="channels">
+        <div class="channel active"># general</div>
+        <div class="channel"># mindfulness</div>
+        <div class="channel"># breathing</div>
+      </nav>
+      <div class="history">
+        <h4>Session History</h4>
+        <ul id="sessionList"></ul>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="controls">
+          <button id="startSession">Start Session</button>
+          <button id="endSession" disabled>End Session</button>
+          <button id="exportPdf" title="Export last report as PDF">Export PDF</button>
+        </div>
+        <div class="title">Empathetic Consultant — Chat</div>
+      </header>
+
+      <section class="content">
+        <section class="center">
+          <div id="chatWindow" class="chatWindow"></div>
+          <div id="inputRow" class="inputRow">
+            <input id="userInput" placeholder="Type or press mic to speak..." />
+            <button id="sendBtn">Send</button>
+            <button id="micBtn" title="Toggle voice input">🎤</button>
+          </div>
+        </section>
+
+        <aside class="rightPanel">
+          <div id="videoWrap" class="videoWrap">
+            <video id="video" autoplay muted playsinline></video>
+            <canvas id="overlay"></canvas>
+          </div>
+          <div id="metrics" class="metrics">
+            <div>Face emotions: <span id="faceEmo">—</span></div>
+            <div>Voice mood: <span id="voiceMood">—</span></div>
+            <div>Detected intent: <span id="detectedIntent">—</span></div>
+            <div class="scoreBoxes">
+              <div class="scoreBox"><div class="label">Angry</div><div id="scoreAngry" class="scoreVal">—</div></div>
+              <div class="scoreBox"><div class="label">Sad</div><div id="scoreSad" class="scoreVal">—</div></div>
+              <div class="scoreBox"><div class="label">Depressed</div><div id="scoreDepressed" class="scoreVal">—</div></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <div id="loginModal" class="modal hidden">
+      <div class="modalContent">
+        <h3>Sign in (local)</h3>
+        <input id="loginName" placeholder="Your name" />
+        <button id="loginBtn">Sign In</button>
+        <button id="closeLogin">Cancel</button>
+      </div>
+    </div>
+
+    <div id="reportModal" class="modal hidden">
+      <div class="modalContent">
+        <h2>Session Report</h2>
+        <pre id="reportText"></pre>
+        <div class="reportActions">
+          <button id="closeReport">Close</button>
+          <a id="downloadReport" href="#" download="session_report.json">Download JSON</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.13.0/dist/tf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="static/client.js"></script>
+</body>
+</html>
